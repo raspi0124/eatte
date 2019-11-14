@@ -40,7 +40,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	reptext = "あああ"
+	reptext = "まだ準備中だよ!もうちょっと待っててね!"
 	print(event.message.text)
 	line_bot_api.reply_message(
 		event.reply_token,
