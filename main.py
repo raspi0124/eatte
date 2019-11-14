@@ -40,7 +40,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	date = dparser.parse(event.message.text,fuzzy=True)
+	rawdate = dparser.parse(event.message.text,fuzzy=True)
+	date = rawdate.strftime('m月%d日')
 	if "欠席" in event.message.text and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
 	if "出席" in event.message.text and date is not None:
