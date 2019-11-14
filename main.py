@@ -46,7 +46,7 @@ def handle_message(event):
 		reptext = "" + date + " に欠席?おっけー。"
 	if "出席" in event.message.text or "行く" in event.message.text and date is not None:
 		reptext = "" + date + " に出席?了解。"
-	if "遅れて" in event.message.text or "遅れる" in event.message.text and date is not None:
+	if "遅れて" in event.message.text or "遅れる" in event.message.text or "遅刻" in event.message.text and date is not None:
 		reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
 	elif date is None:
 		reptext = "日付入ってる?"
