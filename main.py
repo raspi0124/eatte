@@ -1,5 +1,5 @@
 from flask import Flask, request, abort
-
+import dateutil.parser as dparser
 from linebot import (
 	LineBotApi, WebhookHandler
 )
@@ -40,7 +40,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	reptext = "まだ準備中だよ!もうちょっと待っててね!"
+	date = dparser.parse(event.message.text,fuzzy=True)
+	if "欠席" in event.message.text and date is not None:
+		reptext = "" + date + " に欠席?おっけー。"
+	if "出席" in event.message.text and date is not None:
+		reptext = "" + date + " に出席?了解。"
+	if "遅れて" in event.message.text and date is not None:
+		reptext = "" + date + ""遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
+	elif date is None:
+		reptext = "日付入ってる?"
 	print(event.message.text)
 	line_bot_api.reply_message(
 		event.reply_token,
