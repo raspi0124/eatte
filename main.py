@@ -10,7 +10,7 @@ from linebot.models import (
 	MessageEvent, TextMessage, TextSendMessage,
 )
 import configparser
-import datetime
+from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 
