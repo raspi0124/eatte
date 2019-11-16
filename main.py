@@ -1,5 +1,4 @@
 from flask import Flask, request, abort
-import os
 import dateutil.parser as dparser
 from linebot import (
 	LineBotApi, WebhookHandler
@@ -65,5 +64,5 @@ def handle_message(event):
 
 if __name__ == "__main__":
 #    app.run()
-	port = int(os.getenv("PORT", 80))
+	port = 80
 	app.run(host="0.0.0.0", port=port)
