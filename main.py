@@ -59,9 +59,11 @@ def handle_message(event):
 		if "明日" in msgtext:
 			date = datetime.strftime(tomorrow, '%m月%d日')
 			print("todd")
+			global date
 		if "今日" in msgtext:
 			date = datetime.strftime(today, '%m月%d日')
 			print("tomd")
+			global date
 		else:
 			return ""
 	print("date")
