@@ -57,8 +57,8 @@ def handle_message(event):
 		reptext = "" + date + " に出席?了解。"
 	if "遅れて" in event.message.text or "遅れる" in event.message.text or "遅刻" in event.message.text and date is not None:
 		reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
-	else:
-		reptext = "日付は認識しましたが何を言ってるのかを認識できませんでした。。日付と一緒に'遅刻'、'行く'、'休む'等のキーワードを入れてね!"
+	#elif
+	#	reptext = "日付は認識しましたが何を言ってるのかを認識できませんでした。。日付と一緒に'遅刻'、'行く'、'休む'等のキーワードを入れてね!"
 	print(event.message.text)
 	line_bot_api.reply_message(
 		event.reply_token,
