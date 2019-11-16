@@ -48,28 +48,28 @@ def top():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	msgtext = event.message.text
+	msgtext = msgtext
 	today = datetime.today()
 	tomorrow = today + timedelta(days=1)
-	if "明日" in event.message.text:
+	if "明日" in msgtext:
 		date = datetime.strftime(tomorrow, '%m月%d日')
-	if "今日" in event.messsage.text:
+	if "今日" in msgtext:
 		date = datetime.strftime(today, '%m月%d日')
 	else:
 		try:
-			rawdate = dparser.parse(event.message.text,fuzzy=True)
+			rawdate = dparser.parse(msgtext,fuzzy=True)
 			date = rawdate.strftime('%m月%d日')
 		except dparser._parser.ParserError:
 			return ""
-	if "欠席" in event.message.text or "休む" in event.message.text or "行かない" in event.message.text or "行けない" in event.message.text and date is not None:
+	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
-	if "出席" in event.message.text or "行く" in event.message.text and date is not None:
+	if "出席" in msgtext or "行く" in msgtext and date is not None:
 		reptext = "" + date + " に出席?了解。"
-	if "遅れて" in event.message.text or "遅れる" in event.message.text or "遅刻" in event.message.text and date is not None:
+	if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 		reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
 	#elif
 	#	reptext = "日付は認識しましたが何を言ってるのかを認識できませんでした。。日付と一緒に'遅刻'、'行く'、'休む'等のキーワードを入れてね!"
-	print(event.message.text)
+	print(msgtext)
 	line_bot_api.reply_message(
 		event.reply_token,
 		TextSendMessage(text=reptext))
