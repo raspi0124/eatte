@@ -47,12 +47,12 @@ def top():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	today = datetime.today()
-	tomorrow = today + timedelta(days=1)
 	try:
 		rawdate = dparser.parse(event.message.text,fuzzy=True)
 		date = rawdate.strftime('%m月%d日')
 	except dparser._parser.ParserError:
+		today = datetime.today()
+		tomorrow = today + timedelta(days=1)
 		if "明日" in event.message.text:
 			date = tommorow.strftime('%m月%d日')
 		if "今日" in event.messsage.text:
