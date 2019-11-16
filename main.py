@@ -10,10 +10,11 @@ from linebot.models import (
 	MessageEvent, TextMessage, TextSendMessage,
 )
 import configparser
+
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
-config.read('eatte.setting')
+config.read('../eatte.setting')
 
 #環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = config.get("dev", "YOUR_CHANNEL_ACCESS_TOKEN")
