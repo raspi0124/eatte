@@ -60,6 +60,7 @@ def handle_message(event):
 		tomorrow = today + timedelta(days=1)
 		if "明日" in msgtext:
 			date = datetime.strftime(tomorrow, '%m月%d日')
+			print(date)
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
 			if "出席" in msgtext or "行く" in msgtext and date is not None:
@@ -69,6 +70,7 @@ def handle_message(event):
 			print("todd")
 		if "今日" in msgtext:
 			date = datetime.strftime(today, '%m月%d日')
+			print(date)
 			print("tomd")
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
@@ -76,7 +78,8 @@ def handle_message(event):
 				reptext = "" + date + " に出席?了解。"
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 				reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
-
+		print("reptext")
+		print(reptext)
 		else:
 			return ""
 	print("date")
