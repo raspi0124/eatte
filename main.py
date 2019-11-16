@@ -50,20 +50,21 @@ def top():
 def handle_message(event):
 	msgtext = event.message.text
 	print(msgtext)
+	global date
+
 	try:
 		rawdate = dparser.parse(msgtext,fuzzy=True)
 		date = rawdate.strftime('%m月%d日')
 	except dparser._parser.ParserError:
 		today = datetime.today()
 		tomorrow = today + timedelta(days=1)
+
 		if "明日" in msgtext:
 			date = datetime.strftime(tomorrow, '%m月%d日')
 			print("todd")
-			global date
 		if "今日" in msgtext:
 			date = datetime.strftime(today, '%m月%d日')
 			print("tomd")
-			global date
 		else:
 			return ""
 	print("date")
