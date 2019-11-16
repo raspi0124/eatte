@@ -48,6 +48,7 @@ def top():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+	msgtext = event.message.text
 	today = datetime.today()
 	tomorrow = today + timedelta(days=1)
 	if "明日" in event.message.text:
