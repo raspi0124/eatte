@@ -9,13 +9,15 @@ from linebot.exceptions import (
 from linebot.models import (
 	MessageEvent, TextMessage, TextSendMessage,
 )
-import os
-
+import configparser
 app = Flask(__name__)
 
+config = configparser.ConfigParser()
+config.read('eatte.setting')
+
 #環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = "N5hFysMGjkfnU/q1+dBnyEfdk0NgeMisNkRuEDbnkrvlws4fJveKj9MDezThkFwxduFlmjTfu11cGPQZJkqpk38rmVVZp+thGrfSN8jSmMnGL+KzJFQzb9rpRz3hLKUqMGofFO6xpfccvKReDE6lywdB04t89/1O/w1cDnyilFU="
-YOUR_CHANNEL_SECRET = "570b56f2e855df888b22c79e0514c246"
+YOUR_CHANNEL_ACCESS_TOKEN = config.get("dev", "YOUR_CHANNEL_ACCESS_TOKEN")
+YOUR_CHANNEL_SECRET = config.get("dev", "YOUR_CHANNEL_SECRET")
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
