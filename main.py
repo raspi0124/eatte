@@ -78,10 +78,10 @@ def handle_message(event):
 				reptext = "" + date + " に出席?了解。"
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 				reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
+			else:
+				return ""
 		print("reptext")
 		print(reptext)
-		else:
-			return ""
 	print("date")
 	print(date)
 	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
