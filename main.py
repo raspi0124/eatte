@@ -64,6 +64,8 @@ def handle_message(event):
 			print("tomd")
 		else:
 			return ""
+	print("date")
+	print(date)
 	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
 	if "出席" in msgtext or "行く" in msgtext and date is not None:
@@ -72,7 +74,6 @@ def handle_message(event):
 		reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
 	#elif
 	#	reptext = "日付は認識しましたが何を言ってるのかを認識できませんでした。。日付と一緒に'遅刻'、'行く'、'休む'等のキーワードを入れてね!"
-	print(msgtext)
 	line_bot_api.reply_message(
 		event.reply_token,
 		TextSendMessage(text=reptext))
