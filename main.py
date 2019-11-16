@@ -49,17 +49,17 @@ def top():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	msgtext = event.message.text
-	today = datetime.today()
-	tomorrow = today + timedelta(days=1)
-	if "明日" in msgtext:
-		date = datetime.strftime(tomorrow, '%m月%d日')
-	if "今日" in msgtext:
-		date = datetime.strftime(today, '%m月%d日')
-	else:
-		try:
-			rawdate = dparser.parse(msgtext,fuzzy=True)
-			date = rawdate.strftime('%m月%d日')
-		except dparser._parser.ParserError:
+	try:
+		rawdate = dparser.parse(msgtext,fuzzy=True)
+		date = rawdate.strftime('%m月%d日')
+	except dparser._parser.ParserError:
+		today = datetime.today()
+		tomorrow = today + timedelta(days=1)
+		if "明日" in msgtext:
+			date = datetime.strftime(tomorrow, '%m月%d日')
+		if "今日" in msgtext:
+			date = datetime.strftime(today, '%m月%d日')
+		else:
 			return ""
 	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
