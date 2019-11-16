@@ -51,7 +51,7 @@ def handle_message(event):
 		date = rawdate.strftime('%m月%d日')
 	except dparser._parser.ParserError:
 		return ""
-	if "欠席" in event.message.text or "休む" in event.message.text and date is not None:
+	if "欠席" in event.message.text or "休む" in event.message.text or "行かない" in event.message.text and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
 	if "出席" in event.message.text or "行く" in event.message.text and date is not None:
 		reptext = "" + date + " に出席?了解。"
