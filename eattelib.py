@@ -57,11 +57,12 @@ def adddate(date):
 	if date in list:
 		return None
 	else:
-		num = len(list)
-		worksheet.update_cell("1", date, name)
+		num = int(len(list))
+		num += 1
+		worksheet.update_cell("1", num, date)
 		return True
 def updateattendance(name, date):
-	if ispeopleexist(date):
+	if ispeopleexist(name):
 		pass
 	else:
 		addpeople(name)
