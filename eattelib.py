@@ -43,14 +43,12 @@ def ispeopleexist(name):
 		return True
 	else:
 		return False
-
 def isdateexist(date):
 	aa = getlistofdate()
 	if date in aa:
 		return True
 	else:
 		return False
-
 def adddate(date):
 	date = str(date)
 	list = getlistofdate()
@@ -61,7 +59,7 @@ def adddate(date):
 		num += 1
 		worksheet.update_cell("1", num, date)
 		return True
-def updateattendance(name, date):
+def updateattendance(name, date, status):
 	if ispeopleexist(name):
 		pass
 	else:
@@ -74,5 +72,13 @@ def updateattendance(name, date):
 	dateplace = int(searchthing(date, getlistofdate()))
 	nameplace = nameplace + 1
 	dateplace = dateplace + 1
-	worksheet.update_cell(nameplace, dateplace, name)
+	str(status)
+	worksheet.update_cell(nameplace, dateplace, status)
 	#TODO:ここらへんにrowが無かった場合の対応書く?
+
+def marklate(name, date):
+	updateattendance(name, date, "Late")
+def marknotgoing(name, date):
+	updateattendance(name, date, "Not going")
+def markgoing(name, date):
+	updateattendance(name, date, "Going")

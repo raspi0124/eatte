@@ -12,6 +12,7 @@ from linebot.models import (
 )
 import configparser
 from datetime import datetime, date, timedelta
+import eattelib
 
 app = Flask(__name__)
 
@@ -49,6 +50,8 @@ def top():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	msgtext = event.message.text
+	profile = line_bot_api.get_profile(event.source.user_id)
+	dn = profile.display_name
 	print(msgtext)
 	global date
 
@@ -64,6 +67,7 @@ def handle_message(event):
 			print(date)
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
+				eattelib.marknotgoing(date, dn)
 			if "出席" in msgtext or "行く" in msgtext and date is not None:
 				reptext = "" + date + " に出席?了解。"
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
@@ -76,6 +80,7 @@ def handle_message(event):
 			print("tomd")
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
+				eattelib.marknotgoing(date, dn)
 			if "出席" in msgtext or "行く" in msgtext and date is not None:
 				reptext = "" + date + " に出席?了解。"
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
@@ -88,6 +93,7 @@ def handle_message(event):
 	print(date)
 	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
+		eattelib.marknotgoing(date, dn)
 	if "出席" in msgtext or "行く" in msgtext and date is not None:
 		reptext = "" + date + " に出席?了解。"
 	if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
