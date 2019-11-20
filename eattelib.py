@@ -18,18 +18,17 @@ gc = gspread.authorize(credentials)
 SPREADSHEET_KEY = '1QHGeSZRFmh2vyj8nKbbwcjdCXKZWvs_Sms8mS6l0_KE'
 
 #共有設定したスプレッドシートのシート1を開く
-worksheet = gc.open_by_key(SPREADSHEET_KEY).sheet1
+worksheet = gc.open_by_key(SPREADSHEET_KEY).get_worksheet(0)
 
 def getlistofpeople():
-	raw_row_list = worksheet.row_values(1)
-	#最初のelementを除くことでラベルを削除
-	parsedlist = raw_row_list.pop(0)
-	return parsedlist
-def getlistofdate():
 	raw_col_list = worksheet.col_values(1)
+	#raw_col_list.pop(0)
+	return raw_col_list
+def getlistofdate():
+	raw_row_list = worksheet.row_values(1)
 	#Same reason here as getlistofpeople()
-	parsedlist = raw_col_list.pop(0)
-	return parsedlist
+	#raw_row_list.pop(0)
+	return raw_row_list
 def searchthing(tosearch, list):
 	#TODO:後で見つからなかった際のreturnも追加
 	num = list.index(str(tosearch))
@@ -38,11 +37,41 @@ def addpeople(name):
 	name = str(name)
 	worksheet.append_row([name])
 	return True
-#def adddate(date):
-#	date = str(date)
-#	worksheet.append_col([date])
-#def updateattendance(name, date):
-#	nameplace = searchthing(name, getlistofpeople())
-#	dateplace = searchthing(date, getlistofdate())
+def ispeopleexist(name):
+	aa = getlistofpeople()
+	if name in aa:
+		return True
+	else:
+		return False
+
+def isdateexist(date):
+	aa = getlistofdate()
+	if date in aa:
+		return True
+	else:
+		return False
+
+def adddate(date):
+	date = str(date)
+	list = getlistofdate()
+	if date in list:
+		return None
+	else:
+		num = len(list)
+		worksheet.update_cell("1", date, name)
+		return True
+def updateattendance(name, date):
+	if ispeopleexist(date):
+		pass
+	else:
+		addpeople(name)
+	if isdateexist(date):
+		pass
+	else:
+		adddate(date)
+	nameplace = int(searchthing(name, getlistofpeople()))
+	dateplace = int(searchthing(date, getlistofdate()))
+	nameplace = nameplace + 1
+	dateplace = dateplace + 1
+	worksheet.update_cell(nameplace, dateplace, name)
 	#TODO:ここらへんにrowが無かった場合の対応書く?
-	
