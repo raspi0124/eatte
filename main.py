@@ -66,13 +66,13 @@ def handle_message(event):
 			print(date)
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
-				eattelib.marknotgoing(date, dn)
+				eattelib.marknotgoing(dn, date)
 			if "出席" in msgtext or "行く" in msgtext and date is not None:
 				reptext = "" + date + " に出席?了解。"
-				eattelib.markgoing(date, dn)
+				eattelib.markgoing(dn, date)
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 				reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
-				eattelib.marklate(date, dn)
+				eattelib.marklate(dn, date)
 			print("todd")
 		if "今日" in msgtext:
 			#こんなにここらへんが汚いのはなぜかここでdateだけ定義しても動かなかったため
@@ -80,13 +80,13 @@ def handle_message(event):
 			print(date)
 			if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 				reptext = "" + date + " に欠席?おっけー。"
-				eattelib.marknotgoing(date, dn)
+				eattelib.marknotgoing(dn, date)
 			if "出席" in msgtext or "行く" in msgtext and date is not None:
 				reptext = "" + date + " に出席?了解。"
-				eattelib.markgoing(date, dn)
+				eattelib.markgoing(dn, date)
 			if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 				reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
-				eattelib.marklate(date, dn)
+				eattelib.marklate(dn, date)
 			else:
 				return ""
 		print("reptext")
@@ -95,13 +95,13 @@ def handle_message(event):
 	print(date)
 	if "欠席" in msgtext or "休む" in msgtext or "行かない" in msgtext or "行けない" in msgtext and date is not None:
 		reptext = "" + date + " に欠席?おっけー。"
-		eattelib.marknotgoing(date, dn)
+		eattelib.marknotgoing(dn, date)
 	if "出席" in msgtext or "行く" in msgtext and date is not None:
 		reptext = "" + date + " に出席?了解。"
-		eattelib.markgoing(date, dn)
+		eattelib.markgoing(dn, date)
 	if "遅れて" in msgtext or "遅れる" in msgtext or "遅刻" in msgtext and date is not None:
 		reptext = "" + date + " に遅れる?了解です。詳しいことはとりあえずこのbotまだ対応できないから部長らへんに言ってね!"
-		eattelib.marklate(date, dn)
+		eattelib.marklate(dn, date)
 	#elif
 	#	reptext = "日付は認識しましたが何を言ってるのかを認識できませんでした。。日付と一緒に'遅刻'、'行く'、'休む'等のキーワードを入れてね!"
 	line_bot_api.reply_message(
