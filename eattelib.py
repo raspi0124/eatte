@@ -2,14 +2,13 @@ import gspread
 import json
 import configparser
 
-#ServiceAccountCredentials：Googleの各サービスへアクセスできるservice変数を生成します。
 from oauth2client.service_account import ServiceAccountCredentials
 config = configparser.ConfigParser()
 config.read('../eatte.setting')
 
 #環境変数取得
 SPREADSHEET_KEY = config.get("dev", "SPREADSHEET_KEY")
-#2つのAPIを記述しないとリフレッシュトークンを3600秒毎に発行し続けなければならない
+#2つのAPIを記述しないとリフレッシュトークンを3600秒毎に発行し続けなければならないらしい?
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
 #認証情報設定
